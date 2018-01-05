@@ -13,4 +13,15 @@ describe('validation records',()=>{
     assert(message === 'Name is required')
   })
 
+  it('should not have character less than 2',()=>{
+    const user = new User({name:'al'})
+    const validationResult = user.validateSync()
+  //  console.log(validationResult);
+    const {message} = validationResult.errors.name
+    //console.log(message);
+
+      assert(message ==='Name must be longer than 3 characters')
+
+  })
+
 })
