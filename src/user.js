@@ -13,12 +13,17 @@ const UserSchema = new Schema({
       message:'Name must be longer than 3 characters'
     }
   },
-  postCount:Number,
+  likes:Number,
+//  postCount:Number,
 
   posts:[PostSchema]            //comes from postschema subdocument
 })
 
+UserSchema.virtual('postCount').get(function(){
+//  console.log('hello');
 
+return this.posts.length
+})
 
 const User = mongoose.model('users',UserSchema)
 
