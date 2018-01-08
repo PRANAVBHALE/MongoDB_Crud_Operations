@@ -14,8 +14,10 @@ describe('Subdocument',()=>{
       .then(()=>User.findOne({name:'Joe'}))
       .then((user)=>{
         assert(user.posts[0].title ==='My fav food')
-        done()
+        //done()
       })
+
+      done()
   })
 
 

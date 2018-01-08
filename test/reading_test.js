@@ -21,8 +21,9 @@ describe('Reading user out the database' , () =>{
     //  console.log(users);
   //  asser(users[0]._id === joe._id)  //cant compare ObjectID === String (=== compare with datatype)
     assert(users[0]._id.toString() === joe._id.toString())
-      done()
+    //  done()
     })
+    done()
   })
 
 

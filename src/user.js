@@ -14,6 +14,11 @@ const UserSchema = new Schema({
     }
   },
   likes:Number,
+
+  blogPosts:[{
+    type:Schema.Types.ObjectId,
+    ref:'blogPost'
+  }],
 //  postCount:Number,
 
   posts:[PostSchema]            //comes from postschema subdocument
@@ -23,8 +28,17 @@ UserSchema.virtual('postCount').get(function(){
 //  console.log('hello');
 
 return this.posts.length
+
 })
 
-const User = mongoose.model('users',UserSchema)
+UserSchema.pre('remove',function(next){
+//  this === joe
+  const BlogPost = mongoose.model('blogPost')
+
+  blogPost.remove({_id: {$in:this.blogPosts}})
+    .then(()=> next())
+})
+
+const User = mongoose.model('user',UserSchema)
 
 module.exports = User

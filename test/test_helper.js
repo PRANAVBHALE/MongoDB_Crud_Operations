@@ -16,10 +16,14 @@ before((done)=>{
 
 
 
-beforeEach((done)=>{        //hook used to empty users b4 runing tet suite
-  mongoose.connection.collections.users.drop(()=>{
-    //ready to tun the next test
-
-    done()
-  })
-})
+// beforeEach((done)=>{        //hook used to empty users b4 runing tet suite
+// debugger
+//   const  {users,comments,blogposts} = mongoose.connection.collections;
+//   users.drop(()=>{
+//     comments.drop(()=>{
+//       blogposts.drop(()=>{
+//         done();
+//       })
+//     })
+//   })
+// })

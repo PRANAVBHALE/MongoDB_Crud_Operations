@@ -25,34 +25,34 @@ describe('Updateing records',()=>{
   //   console.log(joe);
   // console.log(joe.set('name','Pranav'));
   joe.set('name','Pranav');
-  assertName(joe.save(),done)
+  assertName(joe.save(),done())
 
   //  done()
   })
 
   it('instance update',(done)=>{
-    assertName(joe.update({name:'Pranav'}),done)
+    assertName(joe.update({name:'Pranav'}),done())
   })
 
 
   it('class can update',(done)=>{
     assertName(
     User.update({name:'Joe'},{name:'Pranav'}),
-    done
+    done()
     )
   })
 
   it('class can findOneAndUpdate',(done)=>{
     assertName(
     User.findOneAndUpdate({name:'Joe'},{name:'Pranav'}),
-    done
+    done()
     )
   })
 
   it('class can findByIdAndUpdate',(done)=>{
     assertName(
     User.findByIdAndUpdate(joe._id,{name:'Pranav'}),
-    done
+    done()
     )
 
   })
