@@ -2,13 +2,18 @@ const assert = require('assert');
 const User = require ('../src/user')
 
 
-describe('Reading user out the database' , () =>{
+describe('Reading user out the database' , (done) =>{
 
-  let joe
+  let joe,pranav,rohan,rocket
 
   beforeEach((done)=>{
     joe = new User({name:'Joe'})
-    joe.save()
+    pranav = new User({name:'Pranav'})
+    rohan = new User({name:'Rohan'})
+    rocket = new User({name:'Rocket'})
+
+
+    Promise.all([joe.save(),pranav.save(),rohan.save(),rocket.save()])
       .then(() => done())
   });
 
@@ -21,7 +26,7 @@ describe('Reading user out the database' , () =>{
     //  console.log(users);
   //  asser(users[0]._id === joe._id)  //cant compare ObjectID === String (=== compare with datatype)
     assert(users[0]._id.toString() === joe._id.toString())
-    //  done()
+  //    done()
     })
     done()
   })
@@ -34,6 +39,18 @@ describe('Reading user out the database' , () =>{
       assert(user.name==='Joe')
       done()
     })
+  })
+
+  it('should skip and limit the result set',(done) => {
+    User.find({}).sort({name: 1}).skip(1).limit(2)   //name: 1 means ascending order
+      .then((users)=>{
+        assert(users.length === 2)
+        assert(users[0].name === 'Joe')
+        assert(users[1].name === 'Pranav')
+      //  done()
+      })
+
+      done()
   })
 
 })
